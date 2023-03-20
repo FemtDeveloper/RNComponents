@@ -1,11 +1,34 @@
 import React, {useRef} from 'react';
-import {View, StyleSheet, Animated} from 'react-native';
+import {View, StyleSheet, Animated, PanResponder} from 'react-native';
 
 export const Animation102Screen = () => {
-  const opacity = useRef(new Animated.Value(0.4)).current;
+  const pan = useRef(new Animated.ValueXY()).current;
+
+  const panResponder = PanResponder.create({
+    onStartShouldSetPanResponder: () => true,
+    onPanResponderMove: Animated.event(
+      [
+        null,
+        {
+          dx: pan.x, // x,y are Animated.Value
+          dy: pan.y,
+        },
+      ],
+      {useNativeDriver: false},
+    ),
+    onPanResponderRelease: () => {
+      Animated.spring(
+        pan, // Auto-multiplexed
+        {toValue: {x: 0, y: 0}, useNativeDriver: false}, // Back to zero
+      ).start();
+    },
+  });
   return (
     <View style={styles.container}>
-      <Animated.View style={{...styles.purpleBox, opacity}} />
+      <Animated.View
+        {...panResponder.panHandlers}
+        style={[pan.getLayout(), styles.purpleBox]}
+      />
     </View>
   );
 };
@@ -20,5 +43,6 @@ const styles = StyleSheet.create({
     height: 150,
     width: 150,
     backgroundColor: 'orange',
+    borderRadius: 10,
   },
 });
