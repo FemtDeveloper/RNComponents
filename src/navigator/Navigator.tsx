@@ -6,6 +6,7 @@ import {
   Animation102Screen,
   SwitchesScreen,
 } from '../screens';
+import AlertScreen from '../screens/AlertScreen';
 
 const Stack = createStackNavigator();
 
@@ -16,6 +17,7 @@ export const Navigator = () => {
       <Stack.Screen name="Animation101Screen" component={Animation101Screen} />
       <Stack.Screen name="Animation102Screen" component={Animation102Screen} />
       <Stack.Screen name="SwitchesScreen" component={SwitchesScreen} />
+      <Stack.Screen name="AlertScreen" component={AlertScreen} />
     </Stack.Navigator>
   );
 };

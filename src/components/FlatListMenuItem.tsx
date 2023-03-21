@@ -30,5 +30,5 @@ export const FlatListMenuItem = ({menuItem}: Props) => {
 const styles = StyleSheet.create({
   container: {flexDirection: 'row', justifyContent: 'space-between'},
   begin: {flex: 1},
-  itemText: {fontSize: 16, fontWeight: '600'},
+  itemText: {fontSize: 16, fontWeight: '600', marginLeft: 10},
 });
