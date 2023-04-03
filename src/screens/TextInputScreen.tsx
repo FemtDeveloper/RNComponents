@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {
   View,
   TextInput,
@@ -14,6 +14,7 @@ import {styles} from '../theme/appTheme';
 import {useForm} from '../hooks/useForm';
 import {Text} from 'react-native';
 import CustomSwitch from '../components/CustomSwitch';
+import {ThemeContext} from '../context/themeContext/ThemeContext';
 
 const TextInputScreen = () => {
   const [form] = useState({
@@ -22,6 +23,10 @@ const TextInputScreen = () => {
     phone: '',
     isActive: false,
   });
+
+  const {
+    theme: {colors},
+  } = useContext(ThemeContext);
 
   // const onChange = (field: string, value: string) => {
   //   setForm({...form, [field]: value});
@@ -37,15 +42,25 @@ const TextInputScreen = () => {
           <View style={styles.global}>
             <HeaderTitle title="TextInputs" />
             <TextInput
-              style={stylesScreen.textInput}
+              style={{
+                ...stylesScreen.textInput,
+                borderColor: colors.text,
+                color: colors.text,
+              }}
               placeholder="Ingrese su nombre"
+              placeholderTextColor={colors.text}
               autoCorrect={false}
               autoCapitalize="words"
               onChangeText={value => onChange(value, 'name')}
             />
             <TextInput
-              style={stylesScreen.textInput}
+              style={{
+                ...stylesScreen.textInput,
+                borderColor: colors.text,
+                color: colors.text,
+              }}
               placeholder="Ingrse su email"
+              placeholderTextColor={colors.text}
               keyboardType="email-address"
               autoCorrect={false}
               onChangeText={value => onChange(value, 'email')}
@@ -60,8 +75,13 @@ const TextInputScreen = () => {
             <HeaderTitle title={JSON.stringify(stateForm, null, 3)} />
             <HeaderTitle title={JSON.stringify(stateForm, null, 3)} />
             <TextInput
-              style={stylesScreen.textInput}
+              style={{
+                ...stylesScreen.textInput,
+                borderColor: colors.text,
+                color: colors.text,
+              }}
               placeholder="Ingrese su teléfono"
+              placeholderTextColor={colors.text}
               onChangeText={value => onChange(value, 'phone')}
               keyboardType="number-pad"
             />
